@@ -1,0 +1,7 @@
+{
+  "name": "schematic-symbol-finder",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test", "build": "node build.mjs" }
+}

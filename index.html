@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schematic Symbol Finder</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="eyebrow">ELECTRICAL + PLC LEARNING TOOL</div>
+      <h1>Schematic Symbol Finder</h1>
+      <p>Describe a shape or what the component does. See a matching drawing and learn what it means in the circuit.</p>
+    </header>
+
+    <section class="search-panel" aria-labelledby="search-title">
+      <h2 id="search-title">What do you see on the drawing?</h2>
+      <form id="lookup-form">
+        <label for="description">Describe the symbol in your own words</label>
+        <textarea id="description" rows="3" placeholder="Example: two vertical lines with a diagonal slash, labeled OL, in series with a contactor coil" required></textarea>
+        <div class="form-row">
+          <label for="context">Drawing context
+            <select id="context">
+              <option value="any">I'm not sure</option>
+              <option value="control">Wired control schematic</option>
+              <option value="power">Power / one-line drawing</option>
+              <option value="ladder">PLC ladder logic</option>
+              <option value="instrument">Field devices / instrumentation</option>
+            </select>
+          </label>
+          <button type="submit">Find symbol <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+      <div class="examples" aria-label="Example descriptions">
+        <span>Try:</span>
+        <button type="button" data-example="circle with M and three phases">circle with M</button>
+        <button type="button" data-example="normally closed overload contact labeled 95 96">overload 95–96</button>
+        <button type="button" data-example="PLC ladder XIO slash contact">ladder XIO</button>
+      </div>
+    </section>
+
+    <section id="results" class="results" aria-live="polite" aria-label="Symbol matches">
+      <div class="empty-state">Enter a description to identify a symbol. You can also browse the catalog below.</div>
+    </section>
+
+    <section class="catalog-section" aria-labelledby="catalog-title">
+      <div class="section-heading"><h2 id="catalog-title">Symbol catalog</h2><span id="catalog-count"></span></div>
+      <div id="catalog" class="catalog"></div>
+    </section>
+    <aside class="note"><strong>About “exact” matches:</strong> A text description cannot uniquely identify every schematic mark. A crossed contact can mean a physical normally closed contact or a PLC XIO instruction depending on the drawing. This tool shows representative teaching symbols and alternatives. Confirm the drawing legend, device tag, and applicable standard before treating a match as exact. It is not a wiring or safety design tool.</aside>
+    <footer>Made for learning how PLCs, MCCs, and field circuits fit together. Runs entirely in your browser.</footer>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

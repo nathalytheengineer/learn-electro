@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schematic Symbol Finder</title>
+  <style>:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#17334b;background:#f4f7f8}*{box-sizing:border-box}body{margin:0}.shell{max-width:1060px;margin:auto;padding:34px 22px 70px}.hero{padding:18px 0 30px}.eyebrow{color:#087d83;font-weight:800;font-size:.73rem;letter-spacing:.16em}.hero h1{font-size:clamp(2.2rem,5vw,4rem);letter-spacing:-.045em;margin:.3rem 0 .5rem}.hero p{font-size:1.13rem;color:#506675;max-width:680px;line-height:1.55}.search-panel,.result-card,.note{background:white;border:1px solid #d8e4e8;border-radius:18px;box-shadow:0 7px 28px rgba(20,50,70,.05)}.search-panel{padding:26px}.search-panel h2,.section-heading h2{margin:0 0 18px;font-size:1.35rem}label{display:block;font-weight:650;font-size:.92rem}textarea,select{font:inherit;color:inherit;background:#fff;border:1px solid #aabec6;border-radius:10px}textarea{display:block;width:100%;resize:vertical;min-height:95px;margin-top:9px;padding:14px;line-height:1.5}textarea:focus,select:focus,button:focus-visible{outline:3px solid #50b3b4;outline-offset:2px}.form-row{display:flex;gap:14px;align-items:end;justify-content:space-between;margin-top:14px}.form-row label{min-width:235px}.form-row select{display:block;width:100%;padding:10px;margin-top:7px}.form-row>button{background:#087d83;color:white;border:0;padding:13px 22px;border-radius:10px;font-weight:750;font-size:.98rem;cursor:pointer}.form-row>button:hover{background:#06686d}.examples{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:16px;color:#667b87;font-size:.88rem}.examples button{border:1px solid #c6d9dd;border-radius:99px;background:#eff7f7;color:#17656b;padding:5px 10px;cursor:pointer}.results{margin:25px 0 40px}.empty-state{border:1px dashed #aac4cd;border-radius:14px;padding:24px;color:#627784;background:#fbfdfd}.result-card{padding:23px}.result-top{display:flex;gap:26px;align-items:center}.symbol-art{background:#f7fafb;border:1px solid #dae6e9;border-radius:12px;display:grid;place-items:center;flex:0 0 240px;height:154px}.symbol-art svg{width:92%;height:90%}.result-main{flex:1;min-width:0}.pill{display:inline-block;font-size:.73rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#116a70;background:#def1f0;border-radius:20px;padding:5px 9px}.result-main h2{font-size:1.65rem;margin:11px 0 5px}.notation{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#526b79}.result-main p{line-height:1.55;margin:12px 0}.details{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.detail{background:#f3f8f9;border-radius:10px;padding:13px;line-height:1.45;font-size:.91rem}.detail strong{display:block;margin-bottom:4px}.alternatives{margin-top:18px;border-top:1px solid #dbe7e9;padding-top:15px}.alternatives h3{font-size:.95rem;margin:0 0 10px}.alternatives button,.catalog button{cursor:pointer;color:inherit}.alternatives button{border:1px solid #bfd7db;background:white;border-radius:8px;padding:9px 12px;margin:0 7px 7px 0}.caution{margin:15px 0 0;color:#805b16;background:#fff5df;border-radius:9px;padding:10px 12px;font-size:.89rem}.section-heading{display:flex;justify-content:space-between;align-items:baseline}.section-heading span{color:#68808c}.catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}.catalog button{text-align:left;background:white;border:1px solid #d8e4e8;border-radius:12px;padding:14px;min-height:124px;transition:transform .12s,box-shadow .12s}.catalog button:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(20,50,70,.09)}.catalog svg{width:100%;height:65px}.catalog .name{display:block;font-weight:750;margin-top:5px}.catalog small{color:#607681}.note{padding:17px 20px;margin-top:34px;line-height:1.55;font-size:.9rem}footer{color:#68808c;font-size:.8rem;margin-top:26px}@media(max-width:650px){.shell{padding:22px 15px 50px}.result-top{display:block}.symbol-art{height:145px}.form-row{display:block}.form-row label{margin-bottom:14px}.form-row>button{width:100%}.details{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="eyebrow">ELECTRICAL + PLC LEARNING TOOL</div>
+      <h1>Schematic Symbol Finder</h1>
+      <p>Describe a shape or what the component does. See a matching drawing and learn what it means in the circuit.</p>
+    </header>
+
+    <section class="search-panel" aria-labelledby="search-title">
+      <h2 id="search-title">What do you see on the drawing?</h2>
+      <form id="lookup-form">
+        <label for="description">Describe the symbol in your own words</label>
+        <textarea id="description" rows="3" placeholder="Example: two vertical lines with a diagonal slash, labeled OL, in series with a contactor coil" required></textarea>
+        <div class="form-row">
+          <label for="context">Drawing context
+            <select id="context">
+              <option value="any">I'm not sure</option>
+              <option value="control">Wired control schematic</option>
+              <option value="power">Power / one-line drawing</option>
+              <option value="ladder">PLC ladder logic</option>
+              <option value="instrument">Field devices / instrumentation</option>
+            </select>
+          </label>
+          <button type="submit">Find symbol <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+      <div class="examples" aria-label="Example descriptions">
+        <span>Try:</span>
+        <button type="button" data-example="circle with M and three phases">circle with M</button>
+        <button type="button" data-example="normally closed overload contact labeled 95 96">overload 95–96</button>
+        <button type="button" data-example="PLC ladder XIO slash contact">ladder XIO</button>
+      </div>
+    </section>
+
+    <section id="results" class="results" aria-live="polite" aria-label="Symbol matches">
+      <div class="empty-state">Enter a description to identify a symbol. You can also browse the catalog below.</div>
+    </section>
+
+    <section class="catalog-section" aria-labelledby="catalog-title">
+      <div class="section-heading"><h2 id="catalog-title">Symbol catalog</h2><span id="catalog-count"></span></div>
+      <div id="catalog" class="catalog"></div>
+    </section>
+    <aside class="note"><strong>About “exact” matches:</strong> A text description cannot uniquely identify every schematic mark. A crossed contact can mean a physical normally closed contact or a PLC XIO instruction depending on the drawing. This tool shows representative teaching symbols and alternatives. Confirm the drawing legend, device tag, and applicable standard before treating a match as exact. It is not a wiring or safety design tool.</aside>
+    <footer>Made for learning how PLCs, MCCs, and field circuits fit together. Runs entirely in your browser.</footer>
+  </main>
+  <script>// These SVGs are explanatory sketches, not licensed reproductions of a standards database.
+const item=(id,name,kind,contexts,aliases,visual,does,distinction,notation='')=>({id,name,kind,contexts,aliases,visual,does,distinction,notation});
+
+const catalog=[
+  item('no-contact','Normally open contact','Wired control',['control'],['normally open contact','no contact','open contact','two parallel lines','two vertical bars','relay contact open','contactor auxiliary no','13 14'], 'Two separated parallel bars on a control rung.','Closes when its associated device actuates, completing this control path.','A physical contact; a PLC XIC looks similar but examines a bit.','—| |—'),
+  item('nc-contact','Normally closed contact','Wired control',['control'],['normally closed contact','nc contact','closed contact','two lines with diagonal slash','two bars with slash','stop contact','push to break','21 22'], 'Two parallel bars crossed by a diagonal slash.','Opens when its associated device actuates, interrupting this control path.','The normal state is the device’s unactuated reference state; verify the drawing legend.','—|/|—'),
+  item('no-pushbutton','Normally open pushbutton','Operator device',['control'],['start button','start pushbutton','momentary pushbutton no','push to make','normally open pushbutton','button open'], 'Normally open contact with a pushbutton actuator above it.','Closes only while the button is pressed, unless a separate latch circuit holds the command.','The button itself does not latch a motor starter.','START / NO'),
+  item('nc-pushbutton','Normally closed pushbutton','Operator device',['control'],['stop button','stop pushbutton','push to break button','normally closed pushbutton','button with slash','momentary stop'], 'Normally closed contact with a pushbutton actuator.','Opens its control path when pressed.','A regular stop button is not automatically a safety-rated emergency stop.','STOP / NC'),
+  item('estop','Emergency-stop actuator','Operator device',['control'],['emergency stop','e stop','estop','mushroom button','red mushroom','safety stop'], 'Mushroom-head actuator above a contact depiction.','Manually initiates a stop function in an appropriately engineered safety circuit.','The symbol alone does not establish safety performance or wiring architecture.','E-STOP'),
+  item('relay-coil','Relay or contactor coil','Wired control',['control'],['relay coil','contactor coil','coil circle','circle labeled km','circle labeled cr','electromagnet coil','a1 a2'], 'Circle with coil tag between two control wires.','A rated control voltage magnetizes the device and moves its associated contacts.','The coil does not carry the motor’s three-phase load current.','KM1 / A1–A2'),
+  item('contactor-power','Three-pole contactor','Motor power',['power'],['three pole contactor','motor starter contacts','three open switches','three phases through contacts','l1 l2 l3 t1 t2 t3','km main contacts','contactor main poles'], 'Three linked normally open contacts, one per phase.','Applies or removes three-phase power to a motor when its separate coil changes state.','An auxiliary contact gives only indirect pickup feedback.','KM1'),
+  item('overload-contact','Overload trip contact (NC)','Motor protection',['control'],['overload contact','overload healthy','ol contact','95 96','thermal trip contact','motor overload normally closed','overload nc'], 'Normally closed control contact tagged OL, often identified 95–96.','Opens the starter control path when the overload relay trips in this common arrangement.','This contact is separate from the current-sensing elements in the motor power path.','OL1 / 95–96'),
+  item('overload-sensing','Overload current-sensing element','Motor protection',['power'],['overload sensing','overload heater','thermal overload element','three overload blocks','motor protection current sensing','ol power circuit'], 'Current-sensing element in a motor phase path.','Monitors motor current or heating behavior for overload protection.','It does not replace required short-circuit protection.','OL1'),
+  item('breaker','Circuit breaker','Power distribution',['power'],['circuit breaker','breaker','cb','qf','switch with trip','three pole breaker','feeder breaker'], 'Switching contacts in a protected branch, shown here as one-line equipment.','Opens a circuit and can interrupt specified fault current within its ratings.','Ratings, trip functions, and isolation suitability depend on the exact device.','QF1 / CB'),
+  item('fuse','Fuse','Power distribution',['power'],['fuse','fusible link','fused circuit','fu symbol','small rectangle in line'], 'Small rectangular fuse element in series with a conductor.','Melts to interrupt excessive current according to its characteristics.','Replacement and coordination must follow equipment documentation.','FU1'),
+  item('disconnect','Disconnect switch','Power distribution',['power'],['disconnect','isolator','knife switch','open switch on feeder','switch disconnector'], 'Open knife-switch contact in a power conductor.','Provides a means to disconnect a circuit when applied and rated correctly.','A plain disconnect is not necessarily an overcurrent protective device.','QS1'),
+  item('transformer','Transformer','Power distribution',['power'],['transformer','two coils','two windings','magnetic core','step down transformer','primary secondary'], 'Two windings with a core between them.','Transfers AC energy by magnetic coupling and changes voltage according to winding ratio.','A transformer is not a generator; its secondary grounding depends on design.','T1'),
+  item('motor-3ph','Three-phase motor','Load',['power'],['motor','three phase motor','circle with m','m inside circle','motor 3 tilde','fan motor','pump motor'], 'Circle marked M and 3~ with three supply leads.','Converts three-phase electrical power into shaft torque.','An auxiliary contact alone cannot prove this motor rotates.','M1 / 3~'),
+  item('pe-ground','Protective earth','Grounding',['power','control'],['protective earth','earth ground','ground symbol','three horizontal lines decreasing','pe','equipment ground'], 'Three horizontal bars of decreasing width beneath a conductor.','Identifies the protective equipment grounding connection.','Not the normal motor-current return or a substitute for neutral.','PE'),
+  item('pilot-lamp','Pilot light / indicator','Operator device',['control'],['lamp','pilot light','indicator lamp','circle with x','circle with cross','run light','fault light'], 'Circle containing an X.','Lights to communicate status when its circuit is energized.','A lit run lamp may report a command rather than physical motion; trace its circuit.','HL1'),
+  item('plc-di','PLC digital input','PLC interface',['control','instrument'],['plc input','digital input','di channel','input module','field switch to plc','input card'], 'Field contact connected to a PLC input block.','Reads an electrical on/off field signal into the controller.','The module’s wiring and input common depend on its specification.','DI'),
+  item('plc-do','PLC digital output','PLC interface',['control'],['plc output','digital output','do channel','output module','output card','plc commands coil'], 'PLC output block connected to an external load or interface.','Switches a compatible low-power load or interface under program control.','Check output type and ratings before driving a coil.','DO'),
+  item('x ic','XIC - Examine If Closed','PLC ladder',['ladder'],['xic','examine if closed','plc normally open','ladder no contact','bit true contact','two vertical lines in ladder'], 'Two upright bars on a PLC ladder rung.','Makes its rung condition true when the addressed bit is 1.','It is a software instruction; it does not prove a physical contact is closed.','XIC / —| |—'),
+  item('xio','XIO - Examine If Open','PLC ladder',['ladder'],['xio','examine if open','plc normally closed','ladder nc contact','bit false contact','slashed ladder contact'], 'Two bars with a diagonal slash on a PLC ladder rung.','Makes its rung condition true when the addressed bit is 0.','It tests a bit; it is not necessarily a physical normally closed field contact.','XIO / —|/|—'),
+  item('ote','OTE - Output Energize','PLC ladder',['ladder'],['ote','output energize','ladder coil','plc coil','parentheses output','output instruction'], 'Parenthesized output symbol at the right of a rung.','Sets the addressed bit when preceding rung conditions are true and clears it when false.','A program bit or output command is not proof that a motor actually started.','OTE / —( )—'),
+  item('vfd','Variable-frequency drive','Motor power',['power'],['vfd','variable frequency drive','inverter drive','ac drive','rectifier inverter motor','speed drive'], 'Block labeled VFD between three-phase input and motor output.','Controls motor speed by generating a controlled-frequency and voltage output.','The motor-side waveform is not ordinary fixed-frequency utility AC.','VFD1'),
+  item('proximity','Proximity sensor','Field device',['instrument','control'],['proximity sensor','prox switch','inductive sensor','detect metal without contact','non contact sensor'], 'Sensor block with target-sensing arcs.','Detects a nearby target and sends a signal to controls.','Wiring and output type vary by sensor model.','B1 / PROX'),
+  item('limit-switch','Limit switch','Field device',['instrument','control'],['limit switch','mechanical position switch','roller lever switch','end of travel switch','actuated by cam'], 'Switch contact with a mechanical lever actuator.','Changes contact state when a moving part reaches its position.','The contact can be NO or NC; inspect the actual contact marking.','LS1'),
+  item('terminal','Terminal block','Connection',['control','power'],['terminal block','terminal strip','numbered terminal','wire landing point','screw terminal','x1 terminal'], 'Small connection circle or block in an uninterrupted conductor.','Provides a labeled point for joining and servicing conductors.','A terminal does not by itself protect or switch the circuit.','X1:1'),
+  item('capacitor','Capacitor','Electronic component',['control','power'],['capacitor','two plates','two parallel lines no wire between','capacitance','c1'], 'Two parallel plates separated by a gap.','Stores energy in an electric field and opposes sudden voltage change.','Can resemble a NO contact in a rough verbal description; check circuit context and tag.','C1')
+];
+
+const common=`fill="none" stroke="#173b52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"`;
+const line=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+const txt=(x,y,s,size=13)=>`<text x="${x}" y="${y}" text-anchor="middle" font-family="Arial,sans-serif" font-size="${size}" font-weight="700" fill="#173b52" stroke="none">${s}</text>`;
+const contact=(nc=false)=>`${line(12,60,93,60)}${line(93,38,93,82)}${line(147,38,147,82)}${line(147,60,228,60)}${nc?line(81,84,158,36):''}`;
+const coil=(tag='KM1')=>`${line(12,60,91,60)}<circle cx="120" cy="60" r="29"/>${line(149,60,228,60)}${txt(120,65,tag,12)}`;
+const box=(label)=>`${line(12,60,55,60)}<rect x="55" y="27" width="130" height="66" rx="4"/>${line(185,60,228,60)}${txt(120,65,label)}`;
+
+function symbolSvg(id){
+ let inner='';
+ switch(id){
+  case 'no-contact':case 'x ic':inner=contact();break;
+  case 'nc-contact':case 'xio':case 'overload-contact':inner=contact(true)+(id==='overload-contact'?txt(120,107,'OL1 95–96',10):'');break;
+  case 'no-pushbutton':case 'nc-pushbutton':inner=contact(id==='nc-pushbutton')+line(120,16,120,40)+line(101,16,139,16);break;
+  case 'estop':inner=contact(true)+line(120,18,120,39)+`<path d="M95 18 Q120 -5 145 18 Z"/>`;break;
+  case 'relay-coil':inner=coil();break;
+  case 'ote':inner=`${line(12,60,89,60)}<path d="M109 36 Q88 60 109 84 M131 36 Q152 60 131 84"/>${line(151,60,228,60)}`;break;
+  case 'contactor-power':inner=[32,60,88].map(y=>`${line(25,y,100,y)}${line(100,y-10,100,y+10)}${line(140,y-10,140,y+10)}${line(140,y,215,y)}`).join('')+txt(120,113,'KM1',10);break;
+  case 'overload-sensing':inner=[32,60,88].map(y=>`${line(20,y,90,y)}<rect x="90" y="${y-10}" width="60" height="20"/>${line(150,y,220,y)}${txt(120,y+4,'OL',9)}`).join('');break;
+  case 'breaker':inner=[33,60,87].map(y=>`${line(20,y,98,y)}<circle cx="98" cy="${y}" r="2" fill="#173b52"/><circle cx="143" cy="${y}" r="2" fill="#173b52"/>${line(98,y,133,y-15)}${line(143,y,220,y)}`).join('');break;
+  case 'disconnect':inner=`${line(12,60,95,60)}<circle cx="95" cy="60" r="2" fill="#173b52"/>${line(95,60,145,35)}<circle cx="151" cy="60" r="2" fill="#173b52"/>${line(151,60,228,60)}`;break;
+  case 'fuse':inner=`${line(12,60,85,60)}<rect x="85" y="44" width="70" height="32"/>${line(85,60,155,60)}${line(155,60,228,60)}`;break;
+  case 'transformer':inner=`${line(12,60,65,60)}<path d="M65 60 c0 -28 30 -28 30 0 c0 28 30 28 30 0 M135 60 c0 -28 30 -28 30 0 c0 28 30 28 30 0"/>${line(195,60,228,60)}${line(128,18,128,102)}${line(133,18,133,102)}`;break;
+  case 'motor-3ph':inner=`${line(12,35,75,35)}${line(12,60,75,60)}${line(12,85,75,85)}<circle cx="135" cy="60" r="53"/>${txt(135,59,'M',26)}${txt(135,80,'3~',13)}`;break;
+  case 'pe-ground':inner=`${line(120,10,120,55)}${line(67,55,173,55)}${line(84,68,156,68)}${line(100,81,140,81)}${line(112,94,128,94)}`;break;
+  case 'pilot-lamp':inner=`${line(12,60,82,60)}<circle cx="120" cy="60" r="38"/>${line(94,34,146,86)}${line(146,34,94,86)}${line(158,60,228,60)}`;break;
+  case 'plc-di':inner=`${line(12,60,66,60)}${line(66,42,66,78)}${line(91,42,91,78)}${line(91,60,107,60)}<rect x="107" y="28" width="109" height="64"/>${txt(162,65,'PLC DI',13)}`;break;
+  case 'plc-do':inner=`<rect x="18" y="28" width="112" height="64"/>${txt(74,65,'PLC DO',13)}${line(130,60,185,60)}<circle cx="199" cy="60" r="14"/>`;break;
+  case 'vfd':inner=`${line(12,60,50,60)}<rect x="50" y="28" width="140" height="64"/>${txt(120,65,'VFD',20)}${line(190,60,228,60)}`;break;
+  case 'proximity':inner=`${line(12,60,70,60)}<rect x="70" y="31" width="82" height="58"/>${txt(111,65,'PROX',12)}<path d="M166 43 Q184 60 166 77 M178 33 Q208 60 178 87"/>`;break;
+  case 'limit-switch':inner=contact()+`<path d="M120 42 L137 12 L162 12"/><circle cx="164" cy="12" r="4"/>`;break;
+  case 'terminal':inner=`${line(12,60,110,60)}<circle cx="120" cy="60" r="10"/>${line(130,60,228,60)}${txt(120,94,'X1:1',11)}`;break;
+  case 'capacitor':inner=`${line(12,60,93,60)}${line(93,32,93,88)}${line(147,32,147,88)}${line(147,60,228,60)}${txt(120,108,'C1',11)}`;break;
+  default:inner=box('?');
+ }
+ return `<svg viewBox="0 0 240 120" role="img" aria-label="Representative symbol for ${catalog.find(s=>s.id===id)?.name||'component'}" xmlns="http://www.w3.org/2000/svg"><g ${common}>${inner}</g></svg>`;
+}
+
+
+const stop=new Set(['a','an','the','with','and','or','of','in','on','to','from','is','it','looks','like','symbol','drawing','shows','two','three','there','for','that','this','one','at','has','have','near','line','lines','wire','wires','circuit','component','labeled']);
+const normalize=s=>s.toLowerCase().replace(/\b(normally open|n\.o\.)\b/g,' no ').replace(/\b(normally closed|n\.c\.)\b/g,' nc ').replace(/\bthree.phase\b/g,' threephase ').replace(/\b24\s*v(?:olt)?\s*d\s*c\b/g,' 24vdc ').replace(/[^a-z0-9~]+/g,' ').replace(/\s+/g,' ').trim();
+const tokens=s=>new Set(normalize(s).split(' ').filter(t=>t&&!stop.has(t)));
+const phrase=(s,q)=>` ${s} `.includes(` ${q} `);
+
+function findSymbols(description, context='any', limit=5){
+ const query=normalize(description);if(!query)return {matches:[],status:'empty'};
+ const q=tokens(description);
+ const has=x=>q.has(x);
+ const genericAmbiguity=(has('parallel')||has('bars')||has('plates'))&&!['control','ladder'].includes(context);
+ const scored=catalog.map(symbol=>{
+  let score=0, reasons=[];
+  const hay=tokens([symbol.name,symbol.notation,symbol.visual,...symbol.aliases].join(' '));
+  for(const word of q){if(hay.has(word)){score+=word.length>5?2.4:1.7;reasons.push(word)}}
+  for(const alias of symbol.aliases){const a=normalize(alias);if(a.length>3&&phrase(query,a)){score+=6+Math.min(5,a.split(' ').length*1.5);reasons.push(alias)}}
+  if(context!=='any')score+=symbol.contexts.includes(context)?3.2:-2.2;
+  // Contacts with a slash are not open contacts; XIC/XIO are software instructions.
+  if(has('nc')||has('slash')||has('slashed')){if(['no-contact','no-pushbutton','x ic'].includes(symbol.id))score-=9}
+  if(has('no')&&!has('nc')){if(['nc-contact','nc-pushbutton','overload-contact','xio'].includes(symbol.id))score-=7}
+  if(has('xio')&&symbol.id==='xio'||has('xic')&&symbol.id==='x ic'||has('ote')&&symbol.id==='ote')score+=18;
+  if((has('95')&&has('96'))&&symbol.id==='overload-contact')score+=13;
+  if((has('circle')&&has('m'))&&symbol.id==='motor-3ph')score+=12;
+  if((has('circle')&&has('x'))&&symbol.id==='pilot-lamp')score+=12;
+  if(has('capacitor')&&symbol.id==='capacitor')score+=14;
+  if(has('coil')&&symbol.id==='relay-coil')score+=6;
+  if(has('overload')&&has('contact')&&symbol.id==='overload-contact')score+=7;
+  if(has('overload')&&has('heater')&&symbol.id==='overload-sensing')score+=8;
+  if(has('stop')&&symbol.id==='nc-pushbutton')score+=6;
+  if(has('start')&&symbol.id==='no-pushbutton')score+=6;
+  if(has('emergency')&&symbol.id==='estop')score+=9;
+  if(genericAmbiguity&&['no-contact','capacitor'].includes(symbol.id))score+=3;
+  return {symbol,score:Math.max(0,score),reasons:[...new Set(reasons)]};
+ }).sort((a,b)=>b.score-a.score||a.symbol.name.localeCompare(b.symbol.name));
+ const matches=scored.filter(x=>x.score>=2.5).slice(0,limit);
+ const top=matches[0]?.score||0, second=matches[1]?.score||0;
+ // It is unsafe to call a vague description an exact match.
+ const status=top<5?'uncertain':((genericAmbiguity&&q.size<=3)||top-second<5?'ambiguous':'likely');
+ return {matches,status};
+}
+
+
+
+const $=selector=>document.querySelector(selector);
+const form=$('#lookup-form'), input=$('#description'), context=$('#context'), results=$('#results'), cards=$('#catalog');
+const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let latest=[];
+
+function showSymbol(symbol,status='selected',alternatives=[]){
+ const caution=status==='ambiguous'?'Several symbols fit this description. Check the alternatives and the drawing context.':status==='uncertain'?'This description is too broad for a reliable identification. Add the tag, nearby components, or whether this is power wiring or PLC ladder logic.':'';
+ results.innerHTML=`<article class="result-card">
+   <div class="result-top"><div class="symbol-art">${symbolSvg(symbol.id)}</div><div class="result-main">
+    <span class="pill">${escapeHtml(symbol.kind)} · ${status==='selected'?'catalog choice':status+' match'}</span>
+    <h2>${escapeHtml(symbol.name)}</h2><div class="notation">${escapeHtml(symbol.notation)}</div>
+    <p><strong>What it looks like:</strong> ${escapeHtml(symbol.visual)}</p>
+   </div></div>
+   <div class="details"><div class="detail"><strong>What it does</strong>${escapeHtml(symbol.does)}</div><div class="detail"><strong>Important distinction</strong>${escapeHtml(symbol.distinction)}</div></div>
+   ${caution?`<p class="caution">${escapeHtml(caution)}</p>`:''}
+   ${alternatives.length?`<div class="alternatives"><h3>Other possible matches</h3>${alternatives.map(s=>`<button type="button" data-id="${s.id}">${escapeHtml(s.name)}</button>`).join('')}</div>`:''}
+  </article>`;
+ results.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function search(){
+ const found=findSymbols(input.value,context.value,7);latest=found.matches.map(x=>x.symbol);
+ if(!latest.length){results.innerHTML='<div class="empty-state">No catalog match yet. Try naming a shape, tag (such as OL or KM1), or function. The catalog below is available to browse.</div>';return}
+ showSymbol(latest[0],found.status,latest.slice(1));
+}
+form.addEventListener('submit',event=>{event.preventDefault();search()});
+document.querySelectorAll('[data-example]').forEach(button=>button.addEventListener('click',()=>{input.value=button.dataset.example;search()}));
+results.addEventListener('click',event=>{const button=event.target.closest('[data-id]');if(!button)return;const chosen=catalog.find(s=>s.id===button.dataset.id);if(chosen)showSymbol(chosen,'selected',latest.filter(s=>s.id!==chosen.id))});
+cards.addEventListener('click',event=>{const button=event.target.closest('[data-id]');if(!button)return;const chosen=catalog.find(s=>s.id===button.dataset.id);if(chosen)showSymbol(chosen)});
+cards.innerHTML=catalog.map(s=>`<button type="button" data-id="${s.id}" aria-label="View ${escapeHtml(s.name)}"><span aria-hidden="true">${symbolSvg(s.id)}</span><span class="name">${escapeHtml(s.name)}</span><small>${escapeHtml(s.kind)}</small></button>`).join('');
+$('#catalog-count').textContent=`${catalog.length} entries`;
+</script>
+</body>
+</html>
