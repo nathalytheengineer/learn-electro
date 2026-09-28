@@ -11,14 +11,14 @@
     <header class="hero">
       <div class="eyebrow">ELECTRICAL + PLC LEARNING TOOL</div>
       <h1>Schematic Symbol Finder</h1>
-      <p>Describe a shape or what the component does. See a matching drawing and learn what it means in the circuit.</p>
+      <p>Describe a shape or what the component does. Cloud AI searches the catalog and explains the strongest possibilities.</p>
     </header>
 
     <section class="search-panel" aria-labelledby="search-title">
-      <h2 id="search-title">What do you see on the drawing?</h2>
+      <h2 id="search-title">Describe the symbol or its job</h2>
       <form id="lookup-form">
-        <label for="description">Describe the symbol in your own words</label>
-        <textarea id="description" rows="3" placeholder="Example: two vertical lines with a diagonal slash, labeled OL, in series with a contactor coil" required></textarea>
+        <label for="description">Describe what it looks like, what it is labeled, or what it does</label>
+        <textarea id="description" rows="3" placeholder="Example: a device that protects a motor when it draws too much current" required></textarea>
         <div class="form-row">
           <label for="context">Drawing context
             <select id="context">
@@ -29,7 +29,7 @@
               <option value="instrument">Field devices / instrumentation</option>
             </select>
           </label>
-          <button type="submit">Find symbol <span aria-hidden="true">→</span></button>
+          <button type="submit">Search with AI <span aria-hidden="true">→</span></button>
         </div>
       </form>
       <div class="examples" aria-label="Example descriptions">
@@ -37,6 +37,7 @@
         <button type="button" data-example="circle with M and three phases">circle with M</button>
         <button type="button" data-example="normally closed overload contact labeled 95 96">overload 95–96</button>
         <button type="button" data-example="PLC ladder XIO slash contact">ladder XIO</button>
+        <button type="button" data-example="protects a motor from overheating">motor protection</button>
       </div>
     </section>
 
@@ -49,7 +50,7 @@
       <div id="catalog" class="catalog"></div>
     </section>
     <aside class="note"><strong>About “exact” matches:</strong> A text description cannot uniquely identify every schematic mark. A crossed contact can mean a physical normally closed contact or a PLC XIO instruction depending on the drawing. This tool shows representative teaching symbols and alternatives. Confirm the drawing legend, device tag, and applicable standard before treating a match as exact. It is not a wiring or safety design tool.</aside>
-    <footer>Made for learning how PLCs, MCCs, and field circuits fit together. Runs entirely in your browser.</footer>
+    <footer>Descriptions are sent to OpenAI through a server-side function for AI search. The API key stays on the server; symbol data and drawings remain catalog-backed.</footer>
   </main>
   <script type="module" src="./app.js"></script>
 </body>

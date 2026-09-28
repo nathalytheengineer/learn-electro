@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="628" viewBox="0 0 1200 628" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic Symbol Finder LinkedIn mockup">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#eef7f8"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="30" flood-color="#1b2f3a" flood-opacity="0.08"/>
+    </filter>
+    <style><![CDATA[
+      .card { fill: url(#bg); stroke: none; }
+      .frame { fill: #ffffff; stroke: #d8e4e8; stroke-width:1.5; rx:14; }
+      .header { fill: #087d83; font-family: Inter, Arial, sans-serif; font-weight:800; font-size:28px; fill:#17334b }
+      .title { font-family: Inter, Arial, sans-serif; font-size:40px; font-weight:800; fill:#17334b }
+      .subtitle { font-family: Inter, Arial, sans-serif; font-size:16px; fill:#506675 }
+      .btn { fill:#087d83; rx:10 }
+      .btn-text{ font-family: Inter, Arial, sans-serif; font-size:16px; fill:white; font-weight:700 }
+      .example { font-family: Inter, Arial, sans-serif; font-size:14px; fill:#17656b }
+      .catalog-pill{ font-family:Inter, Arial, sans-serif; font-size:13px; font-weight:800; fill:#116a70 }
+      .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; fill:#526b79 }
+    ]]></style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="628" fill="#f4f7f8"/>
+
+  <!-- Left phone-like card (app preview) -->
+  <g transform="translate(80,60)">
+    <rect class="frame" width="720" height="508" rx="16" filter="url(#shadow)"/>
+    <!-- app header -->
+    <g transform="translate(28,28)">
+      <text class="title">Schematic Symbol Finder</text>
+      <text x="0" y="46" class="subtitle">Describe what you see — find matching schematic symbols</text>
+
+      <!-- Search area -->
+      <g transform="translate(0,86)">
+        <rect x="0" y="0" width="640" height="120" rx="12" fill="#ffffff" stroke="#d8e4e8"/>
+        <text x="18" y="34" class="code">Describe the symbol in your own words</text>
+        <rect x="18" y="44" width="420" height="56" rx="10" fill="#fbfcfc" stroke="#aabec6"/>
+        <text x="34" y="80" class="example">Example: ladder XIO slash contact</text>
+        <g transform="translate(462,48)">
+          <rect class="btn" width="150" height="56" rx="10"/>
+          <text x="75" y="36" text-anchor="middle" class="btn-text">Find symbol →</text>
+        </g>
+      </g>
+
+      <!-- Result card -->
+      <g transform="translate(0,222)">
+        <rect x="0" y="0" width="640" height="210" rx="12" fill="#ffffff" stroke="#d8e4e8"/>
+        <!-- symbol art box -->
+        <rect x="16" y="16" width="210" height="160" rx="10" fill="#f7fafb" stroke="#dae6e9"/>
+        <!-- simplified symbol: slashed contact -->
+        <g transform="translate(40,36)" stroke="#173b52" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <line x1="0" y1="40" x2="85" y2="40"/>
+          <line x1="85" y1="8" x2="85" y2="72"/>
+          <line x1="135" y1="8" x2="135" y2="72"/>
+          <line x1="135" y1="40" x2="220" y2="40"/>
+          <line x1="70" y1="80" x2="145" y2="32"/>
+        </g>
+        <text x="246" y="48" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#17334b">Normally closed contact</text>
+        <text x="246" y="80" class="code">Notation: —|/|—</text>
+        <text x="246" y="110" class="subtitle">Opens when its associated device actuates, interrupting this control path.</text>
+      </g>
+
+    </g>
+  </g>
+
+  <!-- Right promotional column -->
+  <g transform="translate(840,60)">
+    <rect width="280" height="508" rx="16" fill="#ffffff" stroke="#d8e4e8"/>
+    <text x="24" y="52" class="header">Shareable learning tool</text>
+    <text x="24" y="92" class="subtitle">Browser-only — no server, private by default.</text>
+
+    <g transform="translate(24,140)">
+      <rect x="0" y="0" width="232" height="84" rx="12" fill="#def1f0" stroke="#a9dbda"/>
+      <text x="16" y="34" class="catalog-pill">Symbol catalog • 28 entries</text>
+      <text x="16" y="60" class="code">Browse catalog or search by tag (OL, KM1, XIO)</text>
+    </g>
+
+    <g transform="translate(24,248)">
+      <rect x="0" y="0" width="232" height="84" rx="12" fill="#fff5df" stroke="#f0d9a8"/>
+      <text x="16" y="34" class="catalog-pill">Teaching-first</text>
+      <text x="16" y="60" class="code">Representative sketches, not standards database</text>
+    </g>
+
+    <g transform="translate(24,356)">
+      <rect x="0" y="0" width="232" height="84" rx="12" fill="#eff7f7" stroke="#cdefeff"/>
+      <text x="16" y="34" class="catalog-pill">Ready to host</text>
+      <text x="16" y="60" class="code">GitHub Pages, Netlify, Vercel</text>
+    </g>
+
+    <!-- CTA -->
+    <g transform="translate(24,468)">
+      <rect x="0" y="0" width="232" height="48" rx="10" fill="#087d83"/>
+      <text x="116" y="32" text-anchor="middle" class="btn-text">Try the demo</text>
+    </g>
+
+  </g>
+
+  <!-- Footer attribution -->
+  <text x="80" y="604" font-family="Inter, Arial, sans-serif" font-size="12" fill="#68808c">Made for learning how PLCs, MCCs, and field circuits fit together — Schematic Symbol Finder</text>
+
+</svg>

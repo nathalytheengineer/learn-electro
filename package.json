@@ -3,5 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": { "test": "node --test", "build": "node build.mjs" }
+  "scripts": {
+    "test": "node --test",
+    "build": "node build.mjs",
+    "start": "npx http-server docs -p 5000",
+    "serve": "npx http-server docs -p 5000"
+  },
+  "devDependencies": {
+    "puppeteer": "^21.11.0"
+  }
 }

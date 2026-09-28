@@ -8,11 +8,13 @@ const phrase=(s,q)=>` ${s} `.includes(` ${q} `);
 export function findSymbols(description, context='any', limit=5){
  const query=normalize(description);if(!query)return {matches:[],status:'empty'};
  const q=tokens(description);
+ if(/\b(overheat(?:ing)?|too hot|excessive heat|gets? hot)\b/.test(query))['overload','thermal','heating','current'].forEach(word=>q.add(word));
+ if(/\b(protect(?:s|ion|ing)?|trip(?:s|ped|ping)?)\b/.test(query))['protection','overload','trip'].forEach(word=>q.add(word));
  const has=x=>q.has(x);
  const genericAmbiguity=(has('parallel')||has('bars')||has('plates'))&&!['control','ladder'].includes(context);
  const scored=catalog.map(symbol=>{
   let score=0, reasons=[];
-  const hay=tokens([symbol.name,symbol.notation,symbol.visual,...symbol.aliases].join(' '));
+    const hay=tokens([symbol.name,symbol.notation,symbol.visual,symbol.does,symbol.distinction,...symbol.aliases].join(' '));
   for(const word of q){if(hay.has(word)){score+=word.length>5?2.4:1.7;reasons.push(word)}}
   for(const alias of symbol.aliases){const a=normalize(alias);if(a.length>3&&phrase(query,a)){score+=6+Math.min(5,a.split(' ').length*1.5);reasons.push(alias)}}
   if(context!=='any')score+=symbol.contexts.includes(context)?3.2:-2.2;

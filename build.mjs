@@ -6,5 +6,9 @@ const matcher=fs.readFileSync('matcher.js','utf8').replace(/^import .*?;\s*$/gm,
 const app=fs.readFileSync('app.js','utf8').replace(/^import .*?;\s*$/gm,'');
 const js=[catalog,matcher,app].join('\n').replaceAll('</script>','<\\/script>');
 const output=html.replace('<link rel="stylesheet" href="./styles.css">',`<style>${css}</style>`).replace('<script type="module" src="./app.js"></script>',`<script>${js}</script>`);
-fs.writeFileSync('standalone.html',output);
-console.log('Wrote standalone.html');
+// Ensure docs/ exists for GitHub Pages hosting and write index.html there
+fs.mkdirSync('docs', { recursive: true });
+fs.writeFileSync('docs/index.html', output);
+// Add a nojekyll file to avoid GitHub Pages processing
+fs.writeFileSync('docs/.nojekyll', '');
+console.log('Wrote docs/index.html');

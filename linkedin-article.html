@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Schematic Symbol Finder — Article</title>
+  <style>
+    body{font-family:Inter, Arial, sans-serif;color:#10232b;background:#fff;margin:0;padding:28px}
+    .container{max-width:720px;margin:28px auto}
+    .hero{background:#f4f7f8;border-radius:12px;padding:22px;border:1px solid #e3eef0}
+    h1{font-size:32px;margin:0 0 8px}
+    p.lead{color:#3e5862;font-size:17px;margin:0 0 14px}
+    .meta{color:#6b8994;font-size:13px;margin-bottom:18px}
+    .hero-image{display:block;width:100%;border-radius:10px;overflow:hidden;margin:18px 0}
+    h2{font-size:20px;color:#17334b;margin:22px 0 8px}
+    p{line-height:1.6;color:#30494f}
+    pre, code{background:#fbfcfc;border:1px solid #e6eff0;padding:8px;border-radius:6px;color:#163741}
+    .cta{display:inline-block;padding:10px 14px;background:#087d83;color:#fff;border-radius:8px;margin-top:12px;text-decoration:none}
+    footer{color:#7b999f;font-size:13px;margin-top:28px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <article>
+      <header class="hero">
+        <h1>Schematic Symbol Finder</h1>
+        <p class="lead">Describe a mark on an electrical drawing and get representative symbol sketches, notations, and usage guidance — all in your browser.</p>
+        <div class="meta">Made for learning how PLCs, MCCs, and field circuits fit together · Browser-only demo</div>
+
+        <!-- Inline LinkedIn-sized SVG snapshot for sharing -->
+        <div class="hero-image">
+          <!-- SVG snapshot embedded to preserve appearance when copying -->
+          <?xml version="1.0" encoding="UTF-8"?>
+          <svg width="100%" viewBox="0 0 1200 628" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic Symbol Finder snapshot">
+            <defs>
+              <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="#eef7f8"/>
+                <stop offset="1" stop-color="#ffffff"/>
+              </linearGradient>
+              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="18" stdDeviation="30" flood-color="#1b2f3a" flood-opacity="0.08"/>
+              </filter>
+              <style><![CDATA[
+                .frame{fill:#fff;stroke:#d8e4e8;stroke-width:1.5;}
+                .title{font-family:Inter, Arial, sans-serif;font-weight:800;font-size:28px;fill:#17334b}
+                .subtitle{font-family:Inter, Arial, sans-serif;font-size:16px;fill:#506675}
+                .pill{font-family:Inter, Arial, sans-serif;font-weight:700;font-size:13px;fill:#116a70}
+                ]]></style>
+            </defs>
+            <rect width="1200" height="628" fill="#f4f7f8"/>
+            <g transform="translate(80,60)">
+              <rect class="frame" width="720" height="508" rx="16" filter="url(#shadow)"/>
+              <g transform="translate(28,28)">
+                <text x="0" y="30" class="title">Schematic Symbol Finder</text>
+                <text x="0" y="60" class="subtitle">Describe what you see — find matching schematic symbols</text>
+                <g transform="translate(0,86)">
+                  <rect x="0" y="0" width="640" height="120" rx="12" fill="#fff" stroke="#d8e4e8"/>
+                  <text x="18" y="34" font-family="ui-monospace, monospace" font-size="13" fill="#526b79">Describe the symbol in your own words</text>
+                </g>
+                <g transform="translate(0,222)">
+                  <rect x="0" y="0" width="640" height="210" rx="12" fill="#fff" stroke="#d8e4e8"/>
+                  <rect x="16" y="16" width="210" height="160" rx="10" fill="#f7fafb" stroke="#dae6e9"/>
+                  <g transform="translate(40,36)" stroke="#173b52" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                    <line x1="0" y1="40" x2="85" y2="40"/>
+                    <line x1="85" y1="8" x2="85" y2="72"/>
+                    <line x1="135" y1="8" x2="135" y2="72"/>
+                    <line x1="135" y1="40" x2="220" y2="40"/>
+                    <line x1="70" y1="80" x2="145" y2="32"/>
+                  </g>
+                  <text x="246" y="48" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#17334b">Normally closed contact</text>
+                  <text x="246" y="80" font-family="ui-monospace, monospace" font-size="12" fill="#526b79">Notation: —|/|—</text>
+                </g>
+              </g>
+            </g>
+            <g transform="translate(840,60)">
+              <rect width="280" height="508" rx="16" fill="#fff" stroke="#d8e4e8"/>
+              <text x="24" y="52" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17334b">Shareable learning tool</text>
+              <text x="24" y="92" font-family="Inter, Arial, sans-serif" font-size="14" fill="#506675">Browser-only — no server, private by default.</text>
+            </g>
+          </svg>
+        </div>
+
+        <a class="cta" href="./docs/index.html" target="_blank" rel="noopener">Open the live demo (local build)</a>
+      </header>
+
+      <section>
+        <h2>Why this helps</h2>
+        <p>Quickly identify common schematic marks and instructional ladder symbols (XIC/XIO, OTE) using simple natural-language descriptions. The app ranks likely matches and shows representative SVG sketches and notations for teaching and troubleshooting.</p>
+
+        <h2>How to use</h2>
+        <p>Type a short description into the box (for example: <em>ladder XIO slash contact</em>) and choose a drawing context if you know it (control, power, ladder, instrument). The app returns a ranked match and alternatives with notes about distinctions.</p>
+
+        <h2>Technical notes</h2>
+        <p>The project is client-side only and builds a single-file snapshot at <code>docs/index.html</code>. It's ready to host on GitHub Pages, Netlify, or Vercel. Source files are modular (ES modules) and the build script inlines CSS/JS into the snapshot.</p>
+
+        <h2>Try it</h2>
+        <pre>npm run build
+npx http-server docs -p 5000
+# open http://localhost:5000</pre>
+
+        <footer>
+          <p>Made for learning how PLCs, MCCs, and field circuits fit together — Schematic Symbol Finder.</p>
+        </footer>
+      </section>
+    </article>
+  </div>
+</body>
+</html>
