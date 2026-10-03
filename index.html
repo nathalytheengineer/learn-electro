@@ -5,6 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Schematic Symbol Finder</title>
   <link rel="stylesheet" href="./styles.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --cool-ink: #123c56;
+      --cool-blue: #1769a6;
+      --cool-blue-hover: #105783;
+      --cool-teal: #087f87;
+      --cool-cyan: #2aa8b3;
+      --cool-border: #c8e0e9;
+      --cool-surface: #ffffff;
+      --cool-soft: #eaf5fa;
+      --cool-mint: #e8f7f2;
+    }
+
+    body {
+      color: var(--cool-ink);
+      background: linear-gradient(135deg, #edf7fc 0%, #f5fbfc 52%, #eef9f5 100%);
+    }
+
+    .eyebrow { color: var(--cool-teal); }
+    .hero p, footer { color: #4d6f80; }
+    .search-panel, .result-card, .note {
+      background: var(--cool-surface);
+      border-color: var(--cool-border);
+      box-shadow: 0 9px 30px rgba(24, 79, 108, .08);
+    }
+
+    textarea, select {
+      background: #fbfeff;
+      border-color: #a9cbd9;
+    }
+
+    textarea:focus, select:focus, button:focus-visible {
+      outline-color: var(--cool-cyan);
+    }
+
+    .action-group > button {
+      background: var(--cool-blue);
+    }
+    .action-group > button:hover { background: var(--cool-blue-hover); }
+    .secondary-button {
+      color: #155d72;
+      background: var(--cool-soft);
+      border-color: #bad8e3;
+    }
+    .secondary-button:hover { background: #dceef5; }
+
+    .search-status {
+      color: #145c79;
+      background: #e8f5fb;
+      border-color: #c2e1ee;
+    }
+    .search-status[data-mode="ai"] {
+      color: #17644e;
+      background: var(--cool-mint);
+      border-color: #c3e7d9;
+    }
+
+    .suggestion-chip {
+      color: #165b78;
+      background: #edf7fb;
+      border-color: #c4e0eb;
+    }
+    .suggestion-chip:hover { background: #dceff7; }
+    .result-card .pill {
+      color: #145d78;
+      background: #e9f5fa;
+    }
+    .notation { color: var(--cool-teal); }
+    .detail { background: #f4fafc; border-color: #d5e8ef; }
+    .catalog button {
+      background: #fbfeff;
+      border-color: #c9e0e9;
+    }
+    .catalog button:hover {
+      background: #f0f9fc;
+      box-shadow: 0 8px 20px rgba(24, 79, 108, .13);
+    }
+    .catalog small, .section-heading span { color: #557789; }
+  </style>
 </head>
 <body>
   <main class="shell">
