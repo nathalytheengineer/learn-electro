@@ -91,7 +91,7 @@
     <header class="hero">
       <div class="eyebrow">ELECTRICAL + PLC LEARNING TOOL</div>
       <h1>Schematic Symbol Finder</h1>
-      <p>Describe a shape or what the component does. Cloud AI searches the catalog and explains the strongest possibilities.</p>
+      <p>Search by a symbol's shape, label, or job. Local matching works without a server; optional cloud search can explain likely matches when configured.</p>
     </header>
 
     <section class="search-panel" aria-labelledby="search-title">
@@ -107,6 +107,7 @@
               <option value="power">Power / one-line drawing</option>
               <option value="ladder">PLC ladder logic</option>
               <option value="instrument">Field devices / instrumentation</option>
+              <option value="safety">Safety controls</option>
             </select>
           </label>
           <div class="action-group">
@@ -135,7 +136,7 @@
       <div id="catalog" class="catalog"></div>
     </section>
     <aside class="note"><strong>About “exact” matches:</strong> A text description cannot uniquely identify every schematic mark. A crossed contact can mean a physical normally closed contact or a PLC XIO instruction depending on the drawing. This tool shows representative teaching symbols and alternatives. Confirm the drawing legend, device tag, and applicable standard before treating a match as exact. It is not a wiring or safety design tool.</aside>
-    <footer>Descriptions are sent to OpenAI through a server-side function for AI search. The API key stays on the server; symbol data and drawings remain catalog-backed.</footer>
+    <footer>When deployed with the configured Netlify search function, descriptions are sent server-side to OpenAI. GitHub Pages and the standalone file use local matching; no API key is stored in the browser.</footer>
   </main>
   <script type="module" src="./app.js"></script>
 </body>

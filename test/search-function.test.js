@@ -43,7 +43,7 @@ test('returns only unique catalog matches from structured model output',async()=
  };
 
  try{
-  const response=await handler(event('POST',{description:'protects a motor from overheating',context:'power'}));
+    const response=await handler(event('POST',{description:'protects a motor from overheating',context:'safety'}));
   const body=JSON.parse(response.body);
   assert.equal(response.statusCode,200);
   assert.equal(body.status,'likely');
@@ -51,6 +51,9 @@ test('returns only unique catalog matches from structured model output',async()=
   assert.equal(upstreamRequest.url,'https://api.openai.com/v1/chat/completions');
   assert.equal(upstreamRequest.options.headers.Authorization,'Bearer test-key');
   assert.match(upstreamRequest.options.body,/protects a motor from overheating/);
+    const requestBody=JSON.parse(upstreamRequest.options.body);
+    const userPayload=JSON.parse(requestBody.messages[1].content);
+    assert.equal(userPayload.context,'safety');
  }finally{
   globalThis.fetch=previousFetch;
   if(previousKey===undefined)delete process.env.OPENAI_API_KEY;

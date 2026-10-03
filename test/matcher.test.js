@@ -66,3 +66,17 @@ test('every catalog entry renders a labeled SVG',()=>{
  assert.equal(new Set(catalog.map(s=>s.id)).size,catalog.length);
  for(const s of catalog){assert.match(symbolSvg(s.id),/^<svg /);assert.match(symbolSvg(s.id),/aria-label=/)}
 });
+
+test('catalog explanations and provenance are complete and technically cautious',()=>{
+ for(const symbol of catalog){
+  assert.ok(symbol.visual.trim(),`${symbol.id} needs a visual description`);
+  assert.ok(symbol.does.trim(),`${symbol.id} needs a plain-language explanation`);
+  assert.ok(symbol.distinction.trim(),`${symbol.id} needs a distinction or caveat`);
+  assert.equal(symbol.source,'Original Learn Electro educational sketch');
+  assert.match(symbol.license,/Original/);
+ }
+ assert.match(catalog.find(symbol=>symbol.id==='potential-transformer').distinction,/hazardous/i);
+ assert.match(catalog.find(symbol=>symbol.id==='reversing-starter').distinction,/not a wiring diagram/i);
+ assert.match(catalog.find(symbol=>symbol.id==='star-delta-starter').distinction,/not a wiring diagram/i);
+ assert.doesNotMatch(symbolSvg('potential-transformer'),/M90 60 L150 60/);
+});

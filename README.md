@@ -3,8 +3,8 @@
 A browser app for learning electrical, control, PLC, and field-device symbols. Describe a symbol by appearance, label, purpose, or function, choose the drawing context if known, and review ranked matches with explanations of what each symbol does and how it differs from similar marks.
 
 The app works in two modes:
-- Local matching without any server dependency for quick offline use
-- Cloud AI search through a Netlify Function when an API key is configured
+- Local catalog matching in the GitHub Pages and standalone versions
+- Optional cloud AI search through a Netlify Function when deployed and configured on Netlify
 
 ## Features
 
@@ -30,7 +30,7 @@ Public reference libraries are recorded in [`data/public-symbol-sources.json`](d
 
 ## Run locally
 
-Open `standalone.html` in a modern browser for the no-server version.
+Open `standalone.html` in a modern browser for the self-contained, local-only version. Run `npm run build` after changing the source files to regenerate this page and `docs/index.html` together.
 
 For the module-based version, run:
 
@@ -51,7 +51,7 @@ npm run build
 npm start
 ```
 
-The static production build is generated into the `docs/` folder for GitHub Pages or similar hosts.
+The static production build is generated into the `docs/` folder for GitHub Pages or similar hosts. GitHub Pages uses local catalog matching; it does not run the Netlify cloud-search function.
 
 ## Cloud AI setup
 

@@ -1,6 +1,6 @@
 import {catalog} from '../../catalog.js';
 
-const contexts=new Set(['any','control','power','ladder','instrument']);
+const contexts=new Set(['any','control','power','ladder','instrument','safety']);
 const symbolIds=catalog.map(symbol=>symbol.id);
 const responseFormat={
  type:'json_schema',
