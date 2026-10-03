@@ -63,9 +63,11 @@ export function findSymbols(description, context='any', limit=5){
   if((has('circle')&&has('x'))&&symbol.id==='pilot-lamp')score+=12;
   if(has('capacitor')&&symbol.id==='capacitor')score+=14;
   if(has('coil')&&symbol.id==='relay-coil')score+=6;
+  if((has('overheat')||has('overheating'))&&has('motor')&&symbol.id==='overload-sensing')score+=12;
   if((has('delay')||has('timer'))&&symbol.id==='timer-relay')score+=18;
   if((has('selector')||has('hoa')||((has('hand')&&has('off')&&has('auto'))))&&symbol.id==='selector-switch')score+=16;
-  if((has('pressure')||has('ps'))&&symbol.id==='pressure-switch')score+=18;
+  if((has('pressure')||has('ps'))&&symbol.id==='pressure-switch'&&!['transmitter','indicator','differential'].some(word=>has(word)))score+=18;
+  if(has('differential')&&has('pressure')&&symbol.id==='differential-pressure-transmitter')score+=20;
   if((has('flow')||has('pump'))&&symbol.id==='flow-switch')score+=18;
   if((has('current')&&has('transformer')||has('ct'))&&symbol.id==='current-transformer')score+=20;
   if((has('solenoid')||has('valve'))&&symbol.id==='solenoid-valve')score+=18;

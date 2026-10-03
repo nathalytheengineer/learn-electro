@@ -40,5 +40,19 @@
     "category": "safety",
     "usage": "Helpful for e-stop, light curtain, and safety-relay style educational symbols.",
     "license_note": "These are reference graphics, not safety certification drawings or official compliance documents."
+  },
+  {
+    "name": "QElectroTech element collection",
+    "category": "electrical-and-control-reference",
+    "url": "https://github.com/qelectrotech/qelectrotech-elements",
+    "usage": "Public reference collection for electrical diagrams and control equipment.",
+    "license_note": "Review the repository's current license and attribution requirements before adapting its artwork. The current app sketches are original and do not bundle its artwork."
+  },
+  {
+    "name": "KiCad symbol libraries",
+    "category": "electrical-and-electronic-reference",
+    "url": "https://gitlab.com/kicad/libraries/kicad-symbols",
+    "usage": "Public schematic symbol reference for electrical and electronic components.",
+    "license_note": "Review the current repository license before adapting symbols. The current app sketches are original and do not bundle its artwork."
   }
 ]

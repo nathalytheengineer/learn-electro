@@ -42,6 +42,19 @@ test('common industrial controls resolve to the expanded catalog',()=>{
  assert.equal(top('digital input and output module'),'digital-output');
 });
 
+test('motor-control, HVAC, and process instrumentation references resolve',()=>{
+ assert.equal(top('direct on line motor starter with contactor and overload'),'dol-starter');
+ assert.equal(top('forward reverse contactors motor direction starter'),'reversing-starter');
+ assert.equal(top('star delta reduced voltage motor starter'),'star-delta-starter');
+ assert.equal(top('refrigeration compressor suction discharge'),'hvac-compressor');
+ assert.equal(top('evaporator coil absorbs heat from refrigerant'),'evaporator-coil');
+ assert.equal(top('motorized HVAC air damper actuator'),'hvac-damper');
+ assert.equal(top('pressure indicator PI instrument bubble'),'pressure-indicator');
+ assert.equal(top('level transmitter LT tank level measurement'),'level-transmitter');
+ assert.equal(top('differential pressure transmitter high low taps'),'differential-pressure-transmitter');
+ assert.equal(top('pneumatic control valve final element'),'control-valve');
+});
+
 test('search suggestions surface common symbol descriptions that help refine weak queries',()=>{
  const suggestions=getSearchSuggestions('motor overheating protection');
  assert.ok(suggestions.some(item=>item.toLowerCase().includes('motor')));

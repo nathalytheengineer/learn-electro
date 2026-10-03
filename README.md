@@ -12,18 +12,21 @@ The app works in two modes:
 - Distinguish physical contacts from PLC ladder instructions such as XIC and XIO
 - Show ranked alternatives for ambiguous descriptions
 - Browse a growing symbol catalog with SVG teaching drawings
+- Search motor-control, HVAC/refrigeration, process-instrumentation, PLC, power, and field-device symbols
 - Use context such as control, power, ladder, or instrumentation to improve matching
 
 ## Open-source symbol library approach
 
-This project uses a representative, community-oriented symbol catalog rather than claiming to be the official IEC 60617 database. The catalog is designed for learning, search, and educational interpretation, while still being transparent about which symbols are public teaching references.
+This project uses original, representative teaching sketches rather than claiming to reproduce or bundle the official IEC 60617 database or third-party symbol artwork. Public libraries are listed as references for further research; each upstream license must be checked before adapting its artwork.
 
 The public catalog model includes:
 - `source`: where the symbol came from or how it was curated
 - `license`: the usage note for that entry
 - `aliases`: common search phrases used to find the symbol
 
-This makes it easier to expand the app with open electrical CAD libraries, manufacturer references, and community-maintained SVG symbol sets without hiding the provenance.
+The motor-control, HVAC/refrigeration, and process-instrumentation catalog batch contains 20 original in-app sketches based on common engineering concepts. Their entry metadata identifies them as original educational drawings; the source index lists public reference libraries without implying their artwork was imported.
+
+Public reference libraries are recorded in [`data/public-symbol-sources.json`](data/public-symbol-sources.json), including [QElectroTech elements](https://github.com/qelectrotech/qelectrotech-elements) and [KiCad symbol libraries](https://gitlab.com/kicad/libraries/kicad-symbols). Check each upstream project's current license and attribution requirements before adapting its artwork.
 
 ## Run locally
 
