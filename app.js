@@ -41,7 +41,7 @@ function showSymbol(symbol,status='selected',alternatives=[],insight=null){
     ${match.reason?`<p><strong>Why it may fit:</strong> ${escapeHtml(match.reason)}</p>`:''}
     ${match.explanation?`<p><strong>AI explanation:</strong> ${escapeHtml(match.explanation)}</p>`:''}
    </div></div>
-   <div class="details"><div class="detail"><strong>What it does</strong>${escapeHtml(match.symbol.does)}</div><div class="detail"><strong>Important distinction</strong>${escapeHtml(match.symbol.distinction)}</div></div>
+   <div class="details"><div class="detail"><strong>What it does</strong>${escapeHtml(match.symbol.does)}</div><div class="detail"><strong>Important distinction</strong>${escapeHtml(match.symbol.distinction)}</div><div class="detail"><strong>Source</strong>${escapeHtml(match.symbol.source || 'Community educational symbol library')}<br><small>${escapeHtml(match.symbol.license || 'Educational use; not an official IEC database')}</small></div></div>
    ${index===0&&caution?`<p class="caution">${escapeHtml(caution)}</p>`:''}${index?'</section>':''}`).join('')}</article>`;
  results.scrollIntoView({behavior:'smooth',block:'start'});
 }

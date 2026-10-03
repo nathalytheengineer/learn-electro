@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Community electrical CAD symbol libraries",
+    "category": "general-electrical",
+    "usage": "Good source for educational and public-reference schematic symbols.",
+    "license_note": "Check the source library license before commercial reuse."
+  },
+  {
+    "name": "Open PLC and ladder symbol collections",
+    "category": "plc-ladder",
+    "usage": "Helpful for XIC, XIO, OTE, timer, and basic logic symbol references.",
+    "license_note": "Many are community-made and should be treated as learning references, not official standards copies."
+  },
+  {
+    "name": "Manufacturer drawing libraries",
+    "category": "controls-and-devices",
+    "usage": "Useful for contactor, switch, and sensor imagery when permitted by the vendor license.",
+    "license_note": "Verify that redistribution or reuse is allowed before publishing externally."
+  },
+  {
+    "name": "Community-maintained SVG symbol sets",
+    "category": "svg-graphics",
+    "usage": "Useful for teaching sketches, diagrams, and simplified symbol illustrations.",
+    "license_note": "Treat as representative teaching graphics unless the originating project explicitly states a permissive license."
+  },
+  {
+    "name": "Open industrial controls and PLC reference packs",
+    "category": "plc-and-controls",
+    "usage": "Useful for relays, safety logic, sensors, motion devices, and basic ladder references.",
+    "license_note": "Ideal for educational lookup, but verify source license before downstream publication or commercial reuse."
+  },
+  {
+    "name": "Open instrumentation and process symbol sets",
+    "category": "instrumentation",
+    "usage": "Useful for pressure, flow, temperature, speed, and condition-monitoring symbols.",
+    "license_note": "Good for public educational catalogs; confirm the original pack’s attribution and reuse policy."
+  },
+  {
+    "name": "Public safety and machine-guard symbol references",
+    "category": "safety",
+    "usage": "Helpful for e-stop, light curtain, and safety-relay style educational symbols.",
+    "license_note": "These are reference graphics, not safety certification drawings or official compliance documents."
+  }
+]

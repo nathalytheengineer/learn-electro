@@ -14,6 +14,17 @@ The app works in two modes:
 - Browse a growing symbol catalog with SVG teaching drawings
 - Use context such as control, power, ladder, or instrumentation to improve matching
 
+## Open-source symbol library approach
+
+This project uses a representative, community-oriented symbol catalog rather than claiming to be the official IEC 60617 database. The catalog is designed for learning, search, and educational interpretation, while still being transparent about which symbols are public teaching references.
+
+The public catalog model includes:
+- `source`: where the symbol came from or how it was curated
+- `license`: the usage note for that entry
+- `aliases`: common search phrases used to find the symbol
+
+This makes it easier to expand the app with open electrical CAD libraries, manufacturer references, and community-maintained SVG symbol sets without hiding the provenance.
+
 ## Run locally
 
 Open `standalone.html` in a modern browser for the no-server version.
