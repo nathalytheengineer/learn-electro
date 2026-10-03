@@ -2,10 +2,21 @@ import {catalog,symbolSvg} from './catalog.js';
 import {findSymbols,getSearchSuggestions} from './matcher.js';
 
 const $=selector=>document.querySelector(selector);
-const form=$('#lookup-form'), input=$('#description'), context=$('#context'), results=$('#results'), cards=$('#catalog'), suggestionsPanel=$('#search-suggestions'), clearButton=$('#clear-search');
+const form=$('#lookup-form'), input=$('#description'), context=$('#context'), results=$('#results'), cards=$('#catalog'), suggestionsPanel=$('#search-suggestions'), clearButton=$('#clear-search'), searchStatus=$('#search-status');
 const searchButton=form.querySelector('button[type="submit"]');
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let searchSequence=0;
+
+function setSearchStatus(mode='local'){
+ const status={
+  local:'Local matching ready',
+  ai:'Cloud AI search ready',
+  searching:'Searching symbol catalog…',
+  fallback:'Local fallback active'
+ };
+ searchStatus.textContent=status[mode]||status.local;
+ searchStatus.dataset.mode=mode;
+}
 
 function renderSuggestions(description=''){
  const items=getSearchSuggestions(description, context.value);
@@ -56,11 +67,13 @@ async function search(){
  renderSuggestions(description);
  if(!description){
   results.innerHTML='<div class="empty-state">Enter a description to identify a symbol. You can also browse the catalog below.</div>';
+  setSearchStatus('local');
   return;
  }
  const requestId=++searchSequence;
  searchButton.disabled=true;
- searchButton.textContent='Searching with AI...';
+ searchButton.textContent='Searching…';
+ setSearchStatus('searching');
  results.innerHTML='<div class="empty-state">Searching the symbol catalog with the cloud model...</div>';
  try{
   const response=await fetch('/.netlify/functions/search',{
@@ -77,18 +90,33 @@ async function search(){
   });
   if(!matches.length){
    showLocalMatches(description,'Cloud search found no confident match; showing local suggestions.');
+   setSearchStatus('fallback');
    return;
   }
   showSymbol(matches[0].symbol,data.status,matches.slice(1),matches[0]);
+  setSearchStatus('ai');
  }catch{
-  if(requestId===searchSequence)showLocalMatches(description,'Cloud search is unavailable; showing local matches.');
+  if(requestId===searchSequence){
+   showLocalMatches(description,'Cloud search is unavailable; showing local matches.');
+   setSearchStatus('fallback');
+  }
  }finally{
   if(requestId===searchSequence){
    searchButton.disabled=false;
-   searchButton.innerHTML='Search with AI <span aria-hidden="true">→</span>';
+   searchButton.innerHTML='Search symbol <span aria-hidden="true">→</span>';
   }
  }
 }
+form.addEventListener('submit',event=>{event.preventDefault();void search()});
+input.addEventListener('input',()=>renderSuggestions(input.value.trim()));
+context.addEventListener('change',()=>renderSuggestions(input.value.trim()));
+clearButton.addEventListener('click',()=>{input.value='';renderSuggestions('');results.innerHTML='<div class="empty-state">Enter a description to identify a symbol. You can also browse the catalog below.</div>';setSearchStatus('local');input.focus();});
+document.querySelectorAll('[data-example]').forEach(button=>button.addEventListener('click',()=>{input.value=button.dataset.example;renderSuggestions(input.value);void search()}));
+cards.addEventListener('click',event=>{const button=event.target.closest('[data-id]');if(!button)return;const chosen=catalog.find(s=>s.id===button.dataset.id);if(chosen){searchSequence++;searchButton.disabled=false;searchButton.innerHTML='Search symbol <span aria-hidden="true">→</span>';showSymbol(chosen);setSearchStatus('local')}});
+cards.innerHTML=catalog.map(s=>`<button type="button" data-id="${s.id}" aria-label="View ${escapeHtml(s.name)}"><span aria-hidden="true">${symbolSvg(s.id)}</span><span class="name">${escapeHtml(s.name)}</span><small>${escapeHtml(s.kind)}</small></button>`).join('');
+$('#catalog-count').textContent=`${catalog.length} entries`;
+setSearchStatus('local');
+renderSuggestions('');
 form.addEventListener('submit',event=>{event.preventDefault();void search()});
 input.addEventListener('input',()=>renderSuggestions(input.value.trim()));
 context.addEventListener('change',()=>renderSuggestions(input.value.trim()));
