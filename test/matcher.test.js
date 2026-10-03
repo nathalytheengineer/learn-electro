@@ -29,6 +29,19 @@ test('broad descriptions do not claim certainty',()=>{
  assert.equal(findSymbols('').status,'empty');
 });
 
+test('common industrial controls resolve to the expanded catalog',()=>{
+ assert.equal(top('on delay timer relay'),'timer-relay');
+ assert.equal(top('hand off auto selector switch'),'selector-switch');
+ assert.equal(top('pressure switch trips on low pressure'),'pressure-switch');
+ assert.equal(top('water flow switch for a pump'),'flow-switch');
+ assert.equal(top('current transformer on a feeder'),'current-transformer');
+ assert.equal(top('solenoid valve for compressed air'),'solenoid-valve');
+ assert.equal(top('contactor with auxiliary contact'),'contactor-with-aux');
+ assert.equal(top('thermal overload relay protects a motor'),'thermal-overload-relay');
+ assert.equal(top('HOA selector for a motor starter'),'hoa-switch');
+ assert.equal(top('digital input and output module'),'digital-output');
+});
+
 test('search suggestions surface common symbol descriptions that help refine weak queries',()=>{
  const suggestions=getSearchSuggestions('motor overheating protection');
  assert.ok(suggestions.some(item=>item.toLowerCase().includes('motor')));

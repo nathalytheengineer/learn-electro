@@ -63,6 +63,17 @@ export function findSymbols(description, context='any', limit=5){
   if((has('circle')&&has('x'))&&symbol.id==='pilot-lamp')score+=12;
   if(has('capacitor')&&symbol.id==='capacitor')score+=14;
   if(has('coil')&&symbol.id==='relay-coil')score+=6;
+  if((has('delay')||has('timer'))&&symbol.id==='timer-relay')score+=18;
+  if((has('selector')||has('hoa')||((has('hand')&&has('off')&&has('auto'))))&&symbol.id==='selector-switch')score+=16;
+  if((has('pressure')||has('ps'))&&symbol.id==='pressure-switch')score+=18;
+  if((has('flow')||has('pump'))&&symbol.id==='flow-switch')score+=18;
+  if((has('current')&&has('transformer')||has('ct'))&&symbol.id==='current-transformer')score+=20;
+  if((has('solenoid')||has('valve'))&&symbol.id==='solenoid-valve')score+=18;
+  if((has('aux')||has('auxiliary')||(has('contactor')&&has('aux')))&&symbol.id==='contactor-with-aux')score+=18;
+  if(((has('thermal')&&has('relay'))||(has('overload')&&has('relay')))&&symbol.id==='thermal-overload-relay')score+=20;
+  if((has('hoa')||has('hand')&&has('off')&&has('auto')||has('selector')&&has('motor'))&&symbol.id==='hoa-switch')score+=20;
+  if((has('digital')&&has('input')||has('di'))&&symbol.id==='digital-input')score+=16;
+  if((has('digital')&&has('output')||has('do')||has('module')&&has('digital'))&&symbol.id==='digital-output')score+=18;
   if(has('overload')&&has('contact')&&symbol.id==='overload-contact')score+=7;
   if(has('overload')&&has('heater')&&symbol.id==='overload-sensing')score+=8;
   if(has('stop')&&symbol.id==='nc-pushbutton')score+=6;
