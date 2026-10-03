@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {findSymbols} from '../matcher.js';
+import {findSymbols,getSearchSuggestions} from '../matcher.js';
 import {catalog,symbolSvg} from '../catalog.js';
 
 const top=(q,context='any')=>findSymbols(q,context).matches[0]?.symbol.id;
@@ -28,6 +28,14 @@ test('broad descriptions do not claim certainty',()=>{
  assert.ok(r.matches.length>1);
  assert.equal(findSymbols('').status,'empty');
 });
+
+test('search suggestions surface common symbol descriptions that help refine weak queries',()=>{
+ const suggestions=getSearchSuggestions('motor overheating protection');
+ assert.ok(suggestions.some(item=>item.toLowerCase().includes('motor')));
+ assert.ok(suggestions.some(item=>item.toLowerCase().includes('overload')));
+ assert.ok(suggestions.length>=2);
+});
+
 test('every catalog entry renders a labeled SVG',()=>{
  assert.equal(new Set(catalog.map(s=>s.id)).size,catalog.length);
  for(const s of catalog){assert.match(symbolSvg(s.id),/^<svg /);assert.match(symbolSvg(s.id),/aria-label=/)}

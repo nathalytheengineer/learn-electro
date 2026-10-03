@@ -5,6 +5,42 @@ const normalize=s=>s.toLowerCase().replace(/\b(normally open|n\.o\.)\b/g,' no ')
 const tokens=s=>new Set(normalize(s).split(' ').filter(t=>t&&!stop.has(t)));
 const phrase=(s,q)=>` ${s} `.includes(` ${q} `);
 
+export function getSearchSuggestions(description='', context='any'){
+ const query=normalize(description || '');
+ if(!query)return [];
+ const q=tokens(description || '');
+ const suggestions=[];
+ const add=(...items)=>{for(const item of items){const cleaned=item.trim();if(cleaned&&!suggestions.includes(cleaned))suggestions.push(cleaned);}};
+
+ if(/\b(ladder|plc|xic|xio|ote|instruction|bit)\b/.test(query)){
+  add('PLC ladder XIO slash contact','PLC ladder XIC contact','output energize OTE instruction');
+ }
+ if(/\b(overload|trip|heat|thermal|motor|current|fuse)\b/.test(query)){
+  add('motor overload protection relay','normally closed overload contact labeled 95 96','thermal overload sensing element');
+ }
+ if(/\b(start|stop|pushbutton|button|emergency|mushroom)\b/.test(query)){
+  add('normally closed stop pushbutton','normally open start pushbutton','emergency stop mushroom button');
+ }
+ if(/\b(lamp|pilot|indicator|light|bulb)\b/.test(query)){
+  add('pilot lamp with circle and X','indicator light symbol','lamp with illuminated marker');
+ }
+ if(/\b(transformer|winding|core|magnetic)\b/.test(query)){
+  add('transformer with two windings and magnetic core');
+ }
+ if(/\b(capacitor|store|energy|voltage|charge)\b/.test(query)){
+  add('capacitor');
+ }
+ if(/\b(phase|motor|threephase|three phase|3 phase)\b/.test(query)){
+  add('circle with M and three phases');
+ }
+ if(context==='ladder'&&!suggestions.length){add('PLC ladder XIO slash contact','PLC ladder XIC contact');}
+ if(context==='power'&&!suggestions.length){add('overload contact labeled 95 96','three-phase motor');}
+ if(!suggestions.length){
+  add('circle with M and three phases','normally closed overload contact labeled 95 96','PLC ladder XIO slash contact');
+ }
+ return suggestions.slice(0,3).map(suggestion=>suggestion.replace(/\s+/g,' ').trim());
+}
+
 export function findSymbols(description, context='any', limit=5){
  const query=normalize(description);if(!query)return {matches:[],status:'empty'};
  const q=tokens(description);

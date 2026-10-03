@@ -29,9 +29,13 @@
               <option value="instrument">Field devices / instrumentation</option>
             </select>
           </label>
-          <button type="submit">Search with AI <span aria-hidden="true">→</span></button>
+          <div class="action-group">
+            <button type="button" id="clear-search" class="secondary-button">Clear</button>
+            <button type="submit">Search with AI <span aria-hidden="true">→</span></button>
+          </div>
         </div>
       </form>
+      <div id="search-suggestions" class="search-suggestions" aria-live="polite" hidden></div>
       <div class="examples" aria-label="Example descriptions">
         <span>Try:</span>
         <button type="button" data-example="circle with M and three phases">circle with M</button>

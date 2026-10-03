@@ -1,11 +1,23 @@
 import {catalog,symbolSvg} from './catalog.js';
-import {findSymbols} from './matcher.js';
+import {findSymbols,getSearchSuggestions} from './matcher.js';
 
 const $=selector=>document.querySelector(selector);
-const form=$('#lookup-form'), input=$('#description'), context=$('#context'), results=$('#results'), cards=$('#catalog');
+const form=$('#lookup-form'), input=$('#description'), context=$('#context'), results=$('#results'), cards=$('#catalog'), suggestionsPanel=$('#search-suggestions'), clearButton=$('#clear-search');
 const searchButton=form.querySelector('button[type="submit"]');
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let searchSequence=0;
+
+function renderSuggestions(description=''){
+ const items=getSearchSuggestions(description, context.value);
+ if(!items.length){suggestionsPanel.hidden=true;suggestionsPanel.innerHTML='';return;}
+ suggestionsPanel.hidden=false;
+ suggestionsPanel.innerHTML=`<span>Need a better clue?</span>${items.map(item=>`<button type="button" class="suggestion-chip" data-suggestion="${escapeHtml(item)}">${escapeHtml(item)}</button>`).join('')}`;
+ suggestionsPanel.querySelectorAll('[data-suggestion]').forEach(button=>button.addEventListener('click',()=>{
+  input.value=button.dataset.suggestion;
+  renderSuggestions(input.value);
+  void search();
+ }));
+}
 
 function showSymbol(symbol,status='selected',alternatives=[],insight=null){
  const caution=status==='ambiguous'?'Several symbols fit this description. Check the alternatives and the drawing context.':status==='uncertain'?'This description is too broad for a reliable identification. Add the tag, nearby components, or whether this is power wiring or PLC ladder logic.':'';
@@ -27,6 +39,7 @@ function showLocalMatches(description,notice=''){
  const found=findSymbols(description,context.value,7);
  if(!found.matches.length){
   results.innerHTML=`<div class="empty-state">${notice?`${escapeHtml(notice)} `:''}No catalog match yet. Try describing the shape, tag, job, or behavior. The catalog below is available to browse.</div>`;
+  renderSuggestions(description);
   return;
  }
  const matches=found.matches.map(match=>({
@@ -35,11 +48,16 @@ function showLocalMatches(description,notice=''){
  }));
  showSymbol(matches[0].symbol,found.status,matches.slice(1),matches[0]);
  if(notice)results.insertAdjacentHTML('afterbegin',`<p class="caution">${escapeHtml(notice)}</p>`);
+ renderSuggestions(description);
 }
 
 async function search(){
  const description=input.value.trim();
- if(!description)return;
+ renderSuggestions(description);
+ if(!description){
+  results.innerHTML='<div class="empty-state">Enter a description to identify a symbol. You can also browse the catalog below.</div>';
+  return;
+ }
  const requestId=++searchSequence;
  searchButton.disabled=true;
  searchButton.textContent='Searching with AI...';
@@ -72,7 +90,11 @@ async function search(){
  }
 }
 form.addEventListener('submit',event=>{event.preventDefault();void search()});
-document.querySelectorAll('[data-example]').forEach(button=>button.addEventListener('click',()=>{input.value=button.dataset.example;void search()}));
+input.addEventListener('input',()=>renderSuggestions(input.value.trim()));
+context.addEventListener('change',()=>renderSuggestions(input.value.trim()));
+clearButton.addEventListener('click',()=>{input.value='';renderSuggestions('');results.innerHTML='<div class="empty-state">Enter a description to identify a symbol. You can also browse the catalog below.</div>';input.focus();});
+document.querySelectorAll('[data-example]').forEach(button=>button.addEventListener('click',()=>{input.value=button.dataset.example;renderSuggestions(input.value);void search()}));
 cards.addEventListener('click',event=>{const button=event.target.closest('[data-id]');if(!button)return;const chosen=catalog.find(s=>s.id===button.dataset.id);if(chosen){searchSequence++;searchButton.disabled=false;searchButton.innerHTML='Search with AI <span aria-hidden="true">→</span>';showSymbol(chosen)}});
 cards.innerHTML=catalog.map(s=>`<button type="button" data-id="${s.id}" aria-label="View ${escapeHtml(s.name)}"><span aria-hidden="true">${symbolSvg(s.id)}</span><span class="name">${escapeHtml(s.name)}</span><small>${escapeHtml(s.kind)}</small></button>`).join('');
 $('#catalog-count').textContent=`${catalog.length} entries`;
+renderSuggestions('');
